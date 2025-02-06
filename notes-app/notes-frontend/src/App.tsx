@@ -42,17 +42,38 @@ const dummyNotes: Note[] = [
 
 const App = () => {
   const [notes, setNotes] = useState<Note[]>(dummyNotes);
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("Title", title);
+    console.log("Content", content);
+  };
 
   return (
     <div className="app-container">
-      <form className="note-form">
-        <input placeholder="title" required></input>
-        <textarea placeholder="content" rows={10} required></textarea>
+      <form onSubmit={handleSubmit} className="note-form">
+        <input
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          placeholder="Title"
+          required
+        />
+        <textarea
+          value={content}
+          onChange={(event) => setContent(event.target.value)}
+          placeholder="Content"
+          rows={10}
+          required
+        >
+          {content}
+        </textarea>
         <button type="submit">Add Note</button>
       </form>
       <div className="notes-grid">
         {notes.map((note) => (
-          <div className="note-item">
+          <div className="note-item" key={note.id}>
             <div className="notes-header">
               <button>x</button>
             </div>
