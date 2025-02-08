@@ -8,12 +8,12 @@ const prisma = new PrismaClient();
 app.use(express.json());
 app.use(cors());
 
-app.get("/api/notes", async (req: Request, res: Response) => {
+app.get("/notes", async (req: Request, res: Response) => {
   const notes = await prisma.note.findMany();
   res.json(notes);
 });
 
-app.post("/api/notes", async (req: Request, res: Response) => {
+app.post("/notes", async (req: Request, res: Response) => {
   // Extract title & content from request body
   const { title, content } = req.body;
 
@@ -34,7 +34,7 @@ app.post("/api/notes", async (req: Request, res: Response) => {
   }
 });
 
-app.put("/api/notes/:id", async (req: Request, res: Response) => {
+app.put("/notes/:id", async (req: Request, res: Response) => {
   const { title, content } = req.body;
   const id = parseInt(req.params.id);
 
@@ -57,7 +57,7 @@ app.put("/api/notes/:id", async (req: Request, res: Response) => {
   }
 });
 
-app.delete("/api/notes/:id", async (req: Request, res: Response) => {
+app.delete("/notes/:id", async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
 
   if (!id || isNaN(id)) {
