@@ -1,33 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const dummyGamesArray = [
-  {
-    id: 1,
-    title: "Game One",
-    image:
-      "https://dash-bootstrap-components.opensource.faculty.ai/static/images/placeholder286x180.png",
-  },
-  {
-    id: 2,
-    title: "Game Two",
-    image:
-      "https://dash-bootstrap-components.opensource.faculty.ai/static/images/placeholder286x180.png",
-  },
-  {
-    id: 3,
-    title: "Game Three",
-    image:
-      "https://dash-bootstrap-components.opensource.faculty.ai/static/images/placeholder286x180.png",
-  },
-];
+interface Game {
+  id: number;
+  name: string;
+  background_image: string;
+}
 
 const GamesCardsList: React.FC = () => {
+  const [games, setGames] = useState<Game[]>([]);
+  const [loading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const apiKey = import.meta.env.VITE_RAWG_API_KEY;
+
+  useEffect(() => {
+    fetch(`https://api.rawg.io/api/games?key=${apiKey}&page_size=10`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response failed");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setGames(data.results);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setIsLoading(false);
+      });
+  }, [apiKey]);
+
+  if (loading) return <p>Loading games...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <section className="game-cards">
-      {dummyGamesArray.map((game) => (
+      {games.map((game) => (
         <div key={game.id} className="card">
-          <img src={game.image} alt={game.title} />
-          <h3>{game.title}</h3>
+          <img src={game.background_image} alt={game.name} />
+          <h3>{game.name}</h3>
         </div>
       ))}
     </section>
