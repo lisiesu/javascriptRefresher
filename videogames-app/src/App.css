@@ -1,42 +1,159 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Global Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* .App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+} */
+
+/* Header and Navigation Styles */
+header {
+  background-color: #222;
+  color: #fff;
+  padding: 1rem 2rem;
+}
+
+header nav {
+  display: flex; /* Arrange items in a row */
+  justify-content: space-between; /* Space out the title and the navigation links */
+  align-items: center; /* Vertically center the content */
+}
+
+header nav h1 {
+  font-size: 1.5rem;
+}
+
+header nav ul {
+  list-style: none; /* Remove default list bullets */
+  display: flex; /* Lay out nav items horizontally */
+}
+
+header nav ul li {
+  margin-left: 1rem; /* Spacing between nav items */
+  cursor: pointer;
+  transition: color 0.2s ease; /* Smooth hover color transition */
+}
+
+header nav ul li:hover {
+  color: #ccc; /* Lighter color on hover for interactive feedback */
+}
+
+/* Hamburger Menu and Nav Links - Default */
+.hamburger {
+  display: none; /* Hidden by default (desktop view) */
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+/* Hero Section Styles */
+.hero {
+  background-color: #444;
+  color: #fff;
+  padding: 4rem 2rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem; /* Space below the headline */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.hero p {
+  font-size: 1.25rem; /* Slightly larger paragraph text for clarity */
+}
+
+/* Game Cards Grid Styles */
+.game-cards {
+  display: grid; /* Activate CSS Grid layout */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Dynamic grid that adapts to available space */
+  gap: 1rem; /* Consistent spacing between cards */
+  padding: 2rem; /* Padding around the grid container */
+}
+
+.game-cards .card {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden; /* Ensure content does not spill outside the card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease; /* Smooth scaling on hover */
+  text-align: center;
+}
+
+.game-cards .card:hover {
+  transform: scale(1.03); /* Slight enlargement on hover for interactivity */
+}
+
+.game-cards .card img {
+  width: 100%; /* Image fills the card's width */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Remove any extra inline space */
+}
+
+.game-cards .card h3 {
+  padding: 1rem; /* Space around the card title */
+  font-size: 1.2rem;
+}
+
+/* Responsive and Mobile Adjustments */
+@media (max-width: 768px) {
+  /* Navigation adjustments for mobile */
+  nav {
+    position: relative; /* To allow absolute positioning of the dropdown menu */
   }
-  to {
-    transform: rotate(360deg);
+
+  .nav-links {
+    display: none; /* Hide the navigation links by default */
+    flex-direction: column; /* Stack them vertically when shown */
+    position: absolute;
+    top: 100%; /* Position below the nav bar */
+    right: 0; /* Align to the right side */
+    background-color: #222;
+    width: 200px; /* Fixed width for the dropdown */
+    padding: 1rem;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .nav-links.open {
+    display: flex; /* Show the navigation links when the menu is open */
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .hamburger {
+    display: block; /* Display the hamburger icon on mobile */
+  }
 
-.read-the-docs {
-  color: #888;
+  /* Hero section adjustments for mobile */
+  .hero {
+    padding: 3rem 1rem; /* Reduce padding to maximize available space */
+  }
+
+  .hero h2 {
+    font-size: 2rem; /* Slightly smaller headline on smaller screens */
+  }
+
+  .hero p {
+    font-size: 1rem; /* Adjust supporting text for mobile readability */
+  }
+
+  /* Game cards adjustments for mobile */
+  .game-cards {
+    padding: 1rem; /* Reduce padding to use screen space efficiently */
+  }
 }
