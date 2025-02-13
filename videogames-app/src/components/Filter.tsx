@@ -36,7 +36,7 @@ const Filter: React.FC<GenreFilterProps> = ({
   if (error) {
     return <p>Error loading genres: {error}</p>;
   }
-
+  console.log(genres);
   return (
     <div style={{ padding: "1rem 2rem" }}>
       <label htmlFor="genre-select" style={{ marginRight: "0.5rem" }}>
